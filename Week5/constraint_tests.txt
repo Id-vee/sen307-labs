@@ -1,0 +1,37 @@
+SEN307 WEEK 5 PRACTICAL
+PART 3: TESTING THE CONSTRAINTS
+
+1. NOT NULL Constraint
+Query: INSERT INTO Department (dept_name) VALUES (NULL);
+Result: MySQL Error 1048:
+Column 'dept_name' cannot be null.
+
+2. CHECK Constraint
+Query: INSERT INTO Course (course_code, course_title, credit_units)
+VALUES ('TST101', 'Test', 9);
+Result: MySQL Error 3819:
+Check constraint 'chk_credit_units' is violated.
+
+3. FOREIGN KEY Constraint
+Query: INSERT INTO Student (matric_no, full_name, dept_id)
+VALUES ('TEST001', 'Test', 999);
+Result: MySQL Error 1452:
+Cannot add or update a child row: a foreign key constraint fails.
+
+4. ENUM Constraint
+Query: INSERT INTO Student (matric_no, full_name, gender)
+VALUES ('TEST002', 'Test', 'X');
+Result: MySQL Error 1265:
+Data truncated for column 'gender' at row 1.
+
+5. UNIQUE Constraint
+Attempted to insert a department name that already existed:
+Software Engineering.
+Result: MySQL Error 1062:
+Duplicate entry 'Software Engineering'
+for key 'department.dept_name'.
+
+Verification:
+SELECT COUNT(*) FROM Department; returned 0.
+SELECT COUNT(*) FROM Course; returned 0.
+SELECT COUNT(*) FROM Student; returned 0.
